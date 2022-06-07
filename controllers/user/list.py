@@ -1,6 +1,6 @@
 from app import app
-from app import json
-from app import request
+from flask import json
+from flask import request
 
 
 def list():

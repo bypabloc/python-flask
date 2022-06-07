@@ -1,10 +1,49 @@
 from app import app
-from app import json
-from app import request
+from flask import json
+from flask import request
+
+from models.user import User
 
 
 def create():
     body = request.json
+
+    user = User()
+    user = user.save(
+        name=body['name'],
+        email=body['email'],
+        password=body['password'],
+    )
+    print('Controller -> Save user:')
+    print(user)
+
+    users = User()
+    users = users.save_bulk(
+        list=[
+            {
+                'name': body['name'],
+                'email': body['email'],
+                'password': body['password'],
+            },
+            {
+                'name': body['name'],
+                'email': body['email'],
+                'password': body['password'],
+            },
+            {
+                'name': body['name'],
+                'email': body['email'],
+                'password': body['password'],
+            },
+            {
+                'name': body['name'],
+                'email': body['email'],
+                'password': body['password'],
+            },
+        ],
+    )
+    print('Controller -> Save users:')
+    print(users)
 
     response = app.response_class(
         response=json.dumps({
